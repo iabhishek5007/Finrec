@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".CompletedTaskActivity"></activity>
+        <activity android:name=".FinishedTaskActivity" />
+        <activity android:name=".CompletedActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"

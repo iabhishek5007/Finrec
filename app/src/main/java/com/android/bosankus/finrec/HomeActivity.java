@@ -111,6 +111,8 @@ public class HomeActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         loadProfile();
 
+        loadScreen();
+
         loadTodoListData();
 
         setListener();
@@ -124,9 +126,7 @@ public class HomeActivity extends AppCompatActivity implements SwipeRefreshLayou
         }, 1000);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+    public void loadScreen() {
         progressBar.setVisibility(View.VISIBLE);
         tvTodoListHeader.setVisibility(View.GONE);
         tvTodoListHeaderunderline.setVisibility(View.GONE);
@@ -138,6 +138,8 @@ public class HomeActivity extends AppCompatActivity implements SwipeRefreshLayou
         profileName.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, ProfileActivity.class)));
 
         imgCreate.setOnClickListener(v -> createTodoListItem());
+
+        btCompletedList.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, CompletedTaskActivity.class)));
 
     }
 
@@ -170,11 +172,11 @@ public class HomeActivity extends AppCompatActivity implements SwipeRefreshLayou
                         String creationId = value.getCreationId();
                         String creationDate = value.getCreationDate();
                         String creatorName = value.getCreatorName();
-                        String itemNames = value.getItemNames();
+                        String itemNames = value.getItemName();
                         toDo.setCreationId(creationId);
                         toDo.setCreatorName(creatorName);
                         toDo.setCreationDate(creationDate);
-                        toDo.setItemNames(itemNames);
+                        toDo.setItemName(itemNames);
                         toDoListModelList.add(toDo);
 
                         ToDoListAdapater toDoListAdapater = new ToDoListAdapater(toDoListModelList, HomeActivity.this);
@@ -237,7 +239,7 @@ public class HomeActivity extends AppCompatActivity implements SwipeRefreshLayou
                 mRef.child(creationId).child("creatorName").setValue(creatorName);
             }
             if (!TextUtils.isEmpty(itemNames)) {
-                mRef.child(creationId).child("itemNames").setValue(itemNames);
+                mRef.child(creationId).child("itemName").setValue(itemNames);
             }
             alertDialog.dismiss();
 

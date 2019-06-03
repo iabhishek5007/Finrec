@@ -5,4 +5,5 @@
     <string name="signin_activity_copyright">2019 Copyright by <b>Finrec</b></string>
     <string name="title_activity_main">MainActivity</string>
     <string name="todo_list_empty_state">Nothing in \'To do list\'. Click the add button to create new item.</string>
+    <string name="completed_task_empty_state">Nothing in \'Completed task\'. Create a task from Home.</string>
 </resources>

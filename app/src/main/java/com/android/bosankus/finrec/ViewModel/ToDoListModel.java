@@ -5,7 +5,10 @@ public class ToDoListModel {
     public String creationId;
     public String creationDate;
     public String creatorName;
-    public String itemNames;
+    public String itemName;
+    public String taskSolverName;
+    public String taskCompletionDate;
+    public String itemAmount;
 
     public ToDoListModel() {
     }
@@ -34,11 +37,35 @@ public class ToDoListModel {
         this.creatorName = creatorName;
     }
 
-    public String getItemNames() {
-        return itemNames;
+    public String getItemName() {
+        return itemName;
     }
 
-    public void setItemNames(String itemNames) {
-        this.itemNames = itemNames;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public String getItemAmount() {
+        return itemAmount;
+    }
+
+    public void setItemAmount(String itemAmount) {
+        this.itemAmount = itemAmount;
+    }
+
+    public String getTaskCompletionDate() {
+        return taskCompletionDate;
+    }
+
+    public void setTaskCompletionDate(String taskCompletionDate) {
+        this.taskCompletionDate = taskCompletionDate;
+    }
+
+    public String getTaskSolverName() {
+        return taskSolverName;
+    }
+
+    public void setTaskSolverName(String taskSolverName) {
+        this.taskSolverName = taskSolverName;
     }
 }
