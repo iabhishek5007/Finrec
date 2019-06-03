@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "71109604756",
+    "firebase_url": "https://finrec-db793.firebaseio.com",
+    "project_id": "finrec-db793",
+    "storage_bucket": "finrec-db793.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71109604756:android:e0e451835136c0ed",
+        "android_client_info": {
+          "package_name": "com.android.bosankus.finrec"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "71109604756-8allt5hd7u8hcmgi7qk8i1ratqfra8g6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.bosankus.finrec",
+            "certificate_hash": "6854e8fd24de0762c0eabdcdea3c343712ce6b3c"
+          }
+        },
+        {
+          "client_id": "71109604756-simc8vshqubsurbefe0ibekp2sr1nhc0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdg6YT3SeNQM-ogoVDxUlKzjUuZUAtlh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "71109604756-simc8vshqubsurbefe0ibekp2sr1nhc0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

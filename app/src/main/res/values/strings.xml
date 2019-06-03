@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Finrec</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="signin_activity_tagline">Save money macha!!!</string>
+    <string name="signin_activity_copyright">2019 Copyright by <b>Finrec</b></string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="todo_list_empty_state">Nothing in \'To do list\'. Click the add button to create new item.</string>
+</resources>
