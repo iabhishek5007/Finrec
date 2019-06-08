@@ -1,42 +1,42 @@
 {
   "project_info": {
-    "project_number": "71109604756",
-    "firebase_url": "https://finrec-db793.firebaseio.com",
-    "project_id": "finrec-db793",
-    "storage_bucket": "finrec-db793.appspot.com"
+    "project_number": "25496186436",
+    "firebase_url": "https://finrec-85d3b.firebaseio.com",
+    "project_id": "finrec-85d3b",
+    "storage_bucket": "finrec-85d3b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:71109604756:android:e0e451835136c0ed",
+        "mobilesdk_app_id": "1:25496186436:android:1d005760cfd8670e",
         "android_client_info": {
-          "package_name": "com.android.bosankus.finrec"
+          "package_name": "com.bangalore.bosankus.finrec"
         }
       },
       "oauth_client": [
         {
-          "client_id": "71109604756-8allt5hd7u8hcmgi7qk8i1ratqfra8g6.apps.googleusercontent.com",
+          "client_id": "25496186436-0q7g31dvpekbij5iclh2sn1esf3gqsdp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.android.bosankus.finrec",
+            "package_name": "com.bangalore.bosankus.finrec",
             "certificate_hash": "6854e8fd24de0762c0eabdcdea3c343712ce6b3c"
           }
         },
         {
-          "client_id": "71109604756-simc8vshqubsurbefe0ibekp2sr1nhc0.apps.googleusercontent.com",
+          "client_id": "25496186436-v3b75nsre1ibbgdl6bd9img786758jsb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAdg6YT3SeNQM-ogoVDxUlKzjUuZUAtlh8"
+          "current_key": "AIzaSyDf-hUXDtzzmsK6C_Jg9a-XQF6EysWS8kM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "71109604756-simc8vshqubsurbefe0ibekp2sr1nhc0.apps.googleusercontent.com",
+              "client_id": "25496186436-v3b75nsre1ibbgdl6bd9img786758jsb.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_completed_task_expanded_holder"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_bold"
+            android:text="Task ID"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/activity_completed_task_expanded_creationId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_bold"
+            android:textAllCaps="true"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/gilroy_bold"
+            android:text="Resolve date"
+            android:textColor="@color/darkGrey"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/activity_completed_task_expanded_resolve_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_bold"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/gilroy_bold"
+            android:text="Creation date"
+            android:textColor="@color/darkGrey"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/activity_completed_task_expanded_creation_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_bold"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/gilroy_bold"
+            android:text="Resolver"
+            android:textColor="@color/darkGrey"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/activity_completed_task_expanded_resolver_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_bold"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="27dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/gilroy_bold"
+            android:text="Creator"
+            android:textColor="@color/darkGrey"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/activity_completed_task_expanded_creator_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_bold"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/gilroy_bold"
+            android:text="Items"
+            android:textColor="@color/darkGrey"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/activity_completed_task_expanded_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_bold"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/darkGrey" />
+
+
+        <TextView
+            android:id="@+id/activity_completed_task_expanded_total_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/gilroy_bold"
+            android:maxLines="2"
+            android:textColor="@color/darkGrey"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+
+
+</LinearLayout>

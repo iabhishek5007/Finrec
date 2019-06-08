@@ -6,4 +6,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="todo_list_empty_state">Nothing in \'To do list\'. Click the add button to create new item.</string>
     <string name="completed_task_empty_state">Nothing in \'Completed task\'. Create a task from Home.</string>
+    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+    <string name="fcm_message">Notification</string>
+    <string name="default_notification_channel_id">Notification</string>
 </resources>

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
-    tools:context=".SigninActivity">
+    android:background="@color/colorPrimary"
+    tools:context="com.bangalore.bosankus.finrec.SigninActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -13,7 +13,7 @@
         android:layout_height="100dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/ic_google"
+        android:src="@drawable/ic_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.511"
@@ -28,9 +28,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/signin_activity_tagline"
+        android:fontFamily="@font/gilroy_bold"
         android:textAlignment="center"
-        android:textColor="@color/colorBlack"
-        android:textSize="16sp"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,6 +61,7 @@
         android:layout_marginBottom="8dp"
         android:text="@string/signin_activity_copyright"
         android:textAlignment="center"
+        android:textColor="@color/colorWhite"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
