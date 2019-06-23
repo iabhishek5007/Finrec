@@ -74,8 +74,8 @@ public class ToDoListAdapater extends RecyclerView.Adapter<ToDoListAdapater.View
 
             ViewGroup viewGroup = v.findViewById(android.R.id.content);
             View dialogView = LayoutInflater.from(context).inflate(R.layout.activity_home_expanded_todo_item_layout, viewGroup, false);
-            TextView tvPopupitemNames = dialogView.findViewById(R.id.activity_home_expanded_todo_item_name);
-            tvPopupitemNames.setText(toDoListModel.getItemName());
+            TextInputEditText etPopupitemNames = dialogView.findViewById(R.id.activity_home_expanded_todo_item_name);
+            etPopupitemNames.setText(toDoListModel.getItemName());
             Button btPopupUpdateAmount = dialogView.findViewById(R.id.activity_home_completed_list_btn);
             TextInputEditText etPopupItemAmount = dialogView.findViewById(R.id.activity_home_expanded_todo_item_amount);
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -93,8 +93,8 @@ public class ToDoListAdapater extends RecyclerView.Adapter<ToDoListAdapater.View
                 String creationId = toDoListModel.getCreationId();
                 String taskSolverName = mFirebaseUser.getDisplayName();
                 String taskCompletionDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
-                String itemName = toDoListModel.getItemName();
-                String itemAmount = etPopupItemAmount.getText().toString();
+                String itemName = etPopupitemNames.getText().toString().trim();
+                String itemAmount = etPopupItemAmount.getText().toString().trim();
 
                 if (!TextUtils.isEmpty(creationDate)) {
                     mRefCompletedList.child(toDoListModel.getCreationId()).child("creationDate").setValue(creationDate);

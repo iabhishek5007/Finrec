@@ -60,13 +60,16 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="@drawable/ripple_effect_white"
             android:background="@drawable/ic_done_btn_gradient"
             android:fontFamily="@font/gilroy_bold"
             android:minHeight="0dp"
             android:padding="5dp"
             android:text="Open"
             android:textAllCaps="false"
-            android:textColor="@color/colorWhite" />
+            android:textColor="@color/colorPrimary" />
 
     </LinearLayout>
 

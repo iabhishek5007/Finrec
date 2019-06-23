@@ -1,4 +1,4 @@
-package com.bangalore.bosankus.finrec;
+package com.bangalore.bosankus.finrec.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

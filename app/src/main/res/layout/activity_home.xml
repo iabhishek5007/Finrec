@@ -8,15 +8,19 @@
 
     <TextView
         android:id="@+id/activity_home_profile_name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/gilroy_bold"
         android:textAlignment="center"
-        android:textColor="@color/darkGrey"
+        android:textColor="@color/colorPrimary"
         android:textSize="18sp"
+        android:maxLength="20"
+        android:ellipsize="end"
+        android:drawableStart="@drawable/ic_avatar"
+        android:drawablePadding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -24,47 +28,38 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.042" />
 
-    <TextView
-        android:id="@+id/activity_home_current_month_balance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/gilroy_light"
-        android:text="Upcoming feature : Task Priority"
-        android:textAlignment="center"
-        android:textColor="@color/darkGrey"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_home_profile_name"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
+    <ImageView
         android:id="@+id/activity_home_completed_list_btn"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="@color/colorPrimary"
-        android:fontFamily="@font/gilroy_bold"
-        android:minHeight="0dp"
-        android:padding="10dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="@drawable/ripple_effect_white"
-        android:text="Completed task list"
-        android:textAllCaps="false"
-        android:textColor="@color/colorWhite"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_margin="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/ripple_effect"
+        android:padding="5dp"
+        android:src="@drawable/ic_completed_task"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/activity_home_chart_btn"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/activity_home_profile_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <ImageView
+        android:id="@+id/activity_home_chart_btn"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_margin="8dp"
+        android:padding="5dp"
+        android:src="@drawable/ic_chart"
+        android:tint="@color/colorPrimary"
+        android:background="@drawable/ripple_effect"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_home_current_month_balance"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.961"
+        app:layout_constraintStart_toEndOf="@+id/activity_home_profile_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
 
     <TextView
         android:id="@+id/activity_home_todo_list_header"
@@ -72,6 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/gilroy_bold"
         android:text="Todo List:"
@@ -80,7 +76,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_home_completed_list_btn"
+        app:layout_constraintTop_toBottomOf="@+id/activity_home_profile_name"
         app:layout_constraintVertical_bias="0.023" />
 
     <View
@@ -99,27 +95,19 @@
         app:layout_constraintTop_toBottomOf="@+id/activity_home_todo_list_header"
         app:layout_constraintVertical_bias="0.0" />
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/activity_home_todo_list_refresh"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_home_todo_list_header_underline"
-        app:layout_constraintVertical_bias="0.005">
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/activity_home_todo_list_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="vertical" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_home_todo_list_header_underline"
+            app:layout_constraintVertical_bias="0.005"/>
 
     <ImageView
         android:id="@+id/activity_home_create"

@@ -1,21 +1,15 @@
-package com.bangalore.bosankus.finrec;
+package com.bangalore.bosankus.finrec.Activities;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,13 +17,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bangalore.bosankus.finrec.Adapters.ToDoListAdapater;
-import com.bangalore.bosankus.finrec.Services.InternalNotificationService;
+import com.bangalore.bosankus.finrec.R;
 import com.bangalore.bosankus.finrec.ViewModel.ToDoListModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -50,16 +42,13 @@ import java.util.UUID;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HomeActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class HomeActivity extends AppCompatActivity {
 
     @BindView(R.id.activity_home)
     ConstraintLayout clHome;
 
     @BindView(R.id.activity_home_todo_empty_state)
     ConstraintLayout clEmptyState;
-
-    @BindView(R.id.activity_home_todo_list_refresh)
-    SwipeRefreshLayout swipeRefreshLayout;
 
     @BindView(R.id.activity_home_todo_list_recyclerview)
     RecyclerView recyclerView;
@@ -74,7 +63,10 @@ public class HomeActivity extends AppCompatActivity implements SwipeRefreshLayou
     TextView profileName;
 
     @BindView(R.id.activity_home_completed_list_btn)
-    Button btCompletedList;
+    ImageView imgCompletedList;
+
+    @BindView(R.id.activity_home_chart_btn)
+    ImageView imgChartView;
 
     @BindView(R.id.activity_home_create)
     ImageView imgCreate;
@@ -101,17 +93,6 @@ public class HomeActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         mRef = FirebaseDatabase.getInstance().getReference("todo_list");
 
-        swipeRefreshLayout.setOnRefreshListener(this);
-
-        swipeRefreshLayout.setEnabled(false);
-
-        swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_dark,
-                android.R.color.holo_green_dark,
-                android.R.color.holo_orange_dark,
-                android.R.color.holo_red_dark);
-
-        sendNotification();
-
         loadProfile();
 
         loadScreen();
@@ -119,14 +100,6 @@ public class HomeActivity extends AppCompatActivity implements SwipeRefreshLayou
         loadTodoListData();
 
         setListener();
-    }
-
-    @Override
-    public void onRefresh() {
-        new Handler().postDelayed(() -> {
-            loadTodoListData();
-            swipeRefreshLayout.setRefreshing(false);
-        }, 1000);
     }
 
     public void loadScreen() {
@@ -140,9 +113,11 @@ public class HomeActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         profileName.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, ProfileActivity.class)));
 
-        imgCreate.setOnClickListener(v -> sendNotification());
+        imgCreate.setOnClickListener(v -> createTodoListItem());
 
-        btCompletedList.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, CompletedTaskActivity.class)));
+        imgCompletedList.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, CompletedTaskActivity.class)));
+
+        imgChartView.setOnClickListener(v -> Toast.makeText(getApplicationContext(), "Coming soon", Toast.LENGTH_SHORT).show());
 
     }
 
@@ -250,41 +225,4 @@ public class HomeActivity extends AppCompatActivity implements SwipeRefreshLayou
                     .setAction("Done", null).show();
         });
     }
-
-    private void sendNotification() {
-        RemoteViews expandedView = new RemoteViews(getPackageName(), R.layout.widget_update_notification);
-
-        expandedView.setTextViewText(R.id.timestamp, DateUtils.formatDateTime(this, System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME));
-
-        Intent leftIntent = new Intent(this, InternalNotificationService.class);
-        leftIntent.setAction("left");
-        expandedView.setOnClickPendingIntent(R.id.left_button, PendingIntent.getService(this, 0, leftIntent, PendingIntent.FLAG_UPDATE_CURRENT));
-
-        Intent rightIntent = new Intent(this, InternalNotificationService.class);
-        rightIntent.setAction("right");
-        expandedView.setOnClickPendingIntent(R.id.right_button, PendingIntent.getService(this, 1, rightIntent, PendingIntent.FLAG_UPDATE_CURRENT));
-
-        RemoteViews collapsedView = new RemoteViews(getPackageName(), R.layout.widget_update_notification);
-        collapsedView.setTextViewText(R.id.timestamp, DateUtils.formatDateTime(this, System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME));
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                // these are the three things a NotificationCompat.Builder object requires at a minimum
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Internal Noti")
-                .setContentText("nothing")
-                // notification will be dismissed when tapped
-                .setAutoCancel(true)
-                // tapping notification will open MainActivity
-                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, HomeActivity.class), 0))
-                // setting the custom collapsed and expanded views
-                .setCustomContentView(collapsedView)
-                .setCustomBigContentView(expandedView)
-                // setting style to DecoratedCustomViewStyle() is necessary for custom views to display
-                .setStyle(new NotificationCompat.DecoratedCustomViewStyle());
-
-        // retrieves android.app.NotificationManager
-        NotificationManager notificationManager = (android.app.NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.notify(0, builder.build());
-    }
-
 }

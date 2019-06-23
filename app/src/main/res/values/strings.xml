@@ -9,4 +9,6 @@
     <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
     <string name="fcm_message">Notification</string>
     <string name="default_notification_channel_id">Notification</string>
+    <string name="home_create_task_instruction">Use comma for multiple items</string>
+    <string name="home_create_task_header">Add items to \'To do List\'</string>
 </resources>
