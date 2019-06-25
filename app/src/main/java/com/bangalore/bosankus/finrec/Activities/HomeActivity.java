@@ -32,6 +32,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.perf.FirebasePerformance;
+import com.google.firebase.perf.metrics.Trace;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -75,7 +77,10 @@ public class HomeActivity extends AppCompatActivity {
     ProgressBar progressBar;
 
     private FirebaseAuth mFirebaseAuth;
+
     private FirebaseUser mFirebaseUser;
+
+    private Trace toDoListDataInsertionTrace, todoListDataFetchTrace;
 
     DatabaseReference mRef;
 
@@ -93,11 +98,16 @@ public class HomeActivity extends AppCompatActivity {
 
         mRef = FirebaseDatabase.getInstance().getReference("todo_list");
 
+        toDoListDataInsertionTrace = FirebasePerformance.getInstance().newTrace("toDoListDataInsertionTrace");
+
+        todoListDataFetchTrace = FirebasePerformance.getInstance().newTrace("todoListDataFetchTrace");
+
         loadProfile();
 
         loadScreen();
 
         loadTodoListData();
+        todoListDataFetchTrace.start();
 
         setListener();
     }
@@ -123,12 +133,6 @@ public class HomeActivity extends AppCompatActivity {
 
     public void loadProfile() {
         profileName.setText(String.format("Hi, %s", mFirebaseUser.getDisplayName()));
-    }
-
-    public void recyclerviewAnimation() {
-        int resId = R.anim.layout_animation_fall_down;
-        LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(this, resId);
-        recyclerView.setLayoutAnimation(animation);
     }
 
     public void loadTodoListData() {
@@ -165,10 +169,12 @@ public class HomeActivity extends AppCompatActivity {
                         recyclerView.setAdapter(toDoListAdapater);
                         //recyclerviewAnimation();
 
+                        // Performance trace
+                        todoListDataFetchTrace.stop();
+
                         progressBar.setVisibility(View.GONE);
                     }
-                }
-                else {
+                } else {
                     recyclerView.setVisibility(View.GONE);
                     tvTodoListHeader.setVisibility(View.GONE);
                     tvTodoListHeaderunderline.setVisibility(View.GONE);
@@ -177,6 +183,7 @@ public class HomeActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(HomeActivity.this, "Could not load list", Toast.LENGTH_SHORT).show();
@@ -202,6 +209,9 @@ public class HomeActivity extends AppCompatActivity {
         alertDialog.show();
 
         imgCreateList.setOnClickListener(v -> {
+
+            toDoListDataInsertionTrace.start();
+
             String creationId = UUID.randomUUID().toString().substring(0, 7);
             String creationDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
             String creatorName = mFirebaseUser.getDisplayName();
@@ -223,6 +233,8 @@ public class HomeActivity extends AppCompatActivity {
 
             Snackbar.make(clHome, "Item added", Snackbar.LENGTH_SHORT)
                     .setAction("Done", null).show();
+
+            toDoListDataInsertionTrace.stop();
         });
     }
 }

@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.firebase.firebase-perf'
+
 
 android {
     compileSdkVersion 29
@@ -8,6 +10,7 @@ android {
         targetSdkVersion 29
         versionCode 5
         versionName "1.4"
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -73,6 +76,9 @@ dependencies {
 
     // FCMM
     implementation 'com.google.firebase:firebase-messaging:19.0.1'
+
+    // Firebase Performance monitoring
+    implementation 'com.google.firebase:firebase-perf:18.0.1'
 
     // InstaBug
     implementation 'com.instabug.library:instabug:8.2.2'

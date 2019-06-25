@@ -23,6 +23,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.perf.FirebasePerformance;
+import com.google.firebase.perf.metrics.Trace;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,6 +44,8 @@ public class SigninActivity extends AppCompatActivity {
 
     private FirebaseAuth mFirebaseAuth;
 
+    private Trace signInPerformanceTrace;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +56,8 @@ public class SigninActivity extends AppCompatActivity {
         window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
+
+        signInPerformanceTrace = FirebasePerformance.getInstance().newTrace("signInPerformanceTrace");
 
         googleSignInOptions();
 
@@ -107,11 +113,19 @@ public class SigninActivity extends AppCompatActivity {
                         Log.d(TAG, "signInWithCredential:failure");
                         Toast.makeText(SigninActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
                     }
+
+                    // Performance trace
+                    signInPerformanceTrace.stop();
                 });
     }
 
     private void setListener() {
-        signInButton.setOnClickListener(v -> signIn());
+        signInButton.setOnClickListener(v -> {
+            signIn();
+
+            //Performance trace
+            signInPerformanceTrace.start();
+        });
     }
 
     public void signIn() {

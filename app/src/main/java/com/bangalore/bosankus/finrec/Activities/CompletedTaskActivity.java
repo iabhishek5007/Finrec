@@ -26,6 +26,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.perf.FirebasePerformance;
+import com.google.firebase.perf.metrics.Trace;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +56,8 @@ public class CompletedTaskActivity extends AppCompatActivity implements SwipeRef
 
     private FirebaseUser mFirebaseUser;
 
+    private Trace completedTaskListFetchTrace;
+
     DatabaseReference mRef;
 
     List<ToDoListModel> toDoListModelList;
@@ -70,6 +74,8 @@ public class CompletedTaskActivity extends AppCompatActivity implements SwipeRef
 
         mRef = FirebaseDatabase.getInstance().getReference("completed_task_list");
 
+        completedTaskListFetchTrace = FirebasePerformance.getInstance().newTrace("completedTaskListFetchTrace");
+
         swipeRefreshLayout.setOnRefreshListener(this);
 
         swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_dark,
@@ -80,6 +86,7 @@ public class CompletedTaskActivity extends AppCompatActivity implements SwipeRef
         loadScreen();
 
         loadData();
+        completedTaskListFetchTrace.start();
 
         setListener();
     }
@@ -139,6 +146,9 @@ public class CompletedTaskActivity extends AppCompatActivity implements SwipeRef
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setAdapter(completedTaskAdapter);
                         recyclerviewAnimation();
+
+                        // Performance trace
+                        completedTaskListFetchTrace.stop();
 
                         progressBar.setVisibility(View.GONE);
                     }
