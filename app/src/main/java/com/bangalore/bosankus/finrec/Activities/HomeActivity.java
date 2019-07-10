@@ -3,6 +3,7 @@ package com.bangalore.bosankus.finrec.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bangalore.bosankus.finrec.Adapters.ToDoListAdapater;
 import com.bangalore.bosankus.finrec.R;
 import com.bangalore.bosankus.finrec.ViewModel.ToDoListModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,19 +35,30 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.perf.FirebasePerformance;
 import com.google.firebase.perf.metrics.Trace;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.TimeZone;
 import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private final String TAG = "HOME_ACTIVITY";
 
     @BindView(R.id.activity_home)
     ConstraintLayout clHome;
@@ -102,6 +116,12 @@ public class HomeActivity extends AppCompatActivity {
 
         todoListDataFetchTrace = FirebasePerformance.getInstance().newTrace("todoListDataFetchTrace");
 
+        FirebaseMessaging.getInstance().subscribeToTopic("push_notification");
+
+        handleNotification();
+
+        generateFCMToken();
+
         loadProfile();
 
         loadScreen();
@@ -132,7 +152,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void loadProfile() {
+
         profileName.setText(String.format("Hi, %s", mFirebaseUser.getDisplayName()));
+
     }
 
     public void loadTodoListData() {
@@ -166,6 +188,7 @@ public class HomeActivity extends AppCompatActivity {
                         toDoListAdapater.notifyDataSetChanged();
                         recyclerView.setLayoutManager(recyce);
                         recyclerView.setHasFixedSize(true);
+                        recyclerView.setNestedScrollingEnabled(false);
                         recyclerView.setAdapter(toDoListAdapater);
                         //recyclerviewAnimation();
 
@@ -236,5 +259,45 @@ public class HomeActivity extends AppCompatActivity {
 
             toDoListDataInsertionTrace.stop();
         });
+    }
+
+    private void generateFCMToken() {
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(task -> {
+
+            if (!task.isSuccessful()) {
+
+                Log.w(TAG, "getInstanceId failed", task.getException());
+
+                return;
+            }
+
+            String token = Objects.requireNonNull(task.getResult()).getToken();
+
+            String msg = getString(R.string.msg_token_fmt, token);
+
+            Log.d(TAG, msg);
+
+        });
+    }
+
+    public void handleNotification() {
+
+        if (getIntent().getExtras() != null) {
+
+            for (String key : getIntent().getExtras().keySet()) {
+                String value = getIntent().getExtras().getString(key);
+
+                assert value != null;
+                if (key.equals("AnotherActivity") && value.equals("True")) {
+                    Intent intent = new Intent(this, ProfileActivity.class);
+                    intent.putExtra("value", value);
+                    startActivity(intent);
+                    finish();
+                }
+
+            }
+        }
+
     }
 }

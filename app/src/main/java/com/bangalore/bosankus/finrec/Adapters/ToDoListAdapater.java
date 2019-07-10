@@ -38,7 +38,7 @@ public class ToDoListAdapater extends RecyclerView.Adapter<ToDoListAdapater.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView creatorName, createdItems, creationId;
-        Button btUpdatePrice;
+        TextView tvUpdatePrice;
         ConstraintLayout clParent;
 
         public ViewHolder(@NonNull View itemView) {
@@ -47,7 +47,7 @@ public class ToDoListAdapater extends RecyclerView.Adapter<ToDoListAdapater.View
             creatorName = itemView.findViewById(R.id.activity_home_todo_list_creator_name);
             createdItems = itemView.findViewById(R.id.activity_home_todo_list_items);
             creationId = itemView.findViewById(R.id.activity_home_todo_list_items_creation_id);
-            btUpdatePrice = itemView.findViewById(R.id.activity_home_completed_list_btn);
+            tvUpdatePrice = itemView.findViewById(R.id.activity_home_todo_list_add_price);
         }
     }
 
@@ -70,7 +70,7 @@ public class ToDoListAdapater extends RecyclerView.Adapter<ToDoListAdapater.View
         holder.creatorName.setText(toDoListModel.getCreatorName());
         holder.createdItems.setText(toDoListModel.getItemName());
 
-        holder.btUpdatePrice.setOnClickListener(v -> {
+        holder.tvUpdatePrice.setOnClickListener(v -> {
 
             ViewGroup viewGroup = v.findViewById(android.R.id.content);
             View dialogView = LayoutInflater.from(context).inflate(R.layout.activity_home_expanded_todo_item_layout, viewGroup, false);

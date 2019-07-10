@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,6 +26,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.Objects;
@@ -149,6 +152,24 @@ public class ProfileActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(photoUrl)) {
             mFirebaseDatabase.child(userId).child("photoUrl").setValue(photoUrl);
         }
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(task -> {
+
+            if (!task.isSuccessful()) {
+
+                Log.w(TAG, "getInstanceId failed", task.getException());
+
+                return;
+            }
+
+            String userToke = Objects.requireNonNull(task.getResult()).getToken();
+
+            if (!TextUtils.isEmpty(userToke)) {
+                mFirebaseDatabase.child(userId).child("userToken").setValue(userToke);
+            }
+
+        });
+
         readFromFirebaseDb();
     }
 
