@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.bangalore.bosankus.finrec.R;
@@ -38,7 +39,7 @@ public class SigninActivity extends AppCompatActivity {
     private static int TIME_OUT = 4000;
 
     @BindView(R.id.sign_in_button)
-    SignInButton signInButton;
+    Button signInButton;
 
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -63,15 +64,6 @@ public class SigninActivity extends AppCompatActivity {
 
         setListener();
 
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (mFirebaseAuth.getCurrentUser() != null) {
-            finish();
-            startActivity(new Intent(this, HomeActivity.class));
-        }
     }
 
     public void googleSignInOptions() {
