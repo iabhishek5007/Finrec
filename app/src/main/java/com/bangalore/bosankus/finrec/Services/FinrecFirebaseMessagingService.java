@@ -27,7 +27,7 @@ import java.util.Objects;
 
 public class FinrecFirebaseMessagingService extends FirebaseMessagingService {
 
-    private final String TAG = "Messaging Service";
+    private final String TAG = "Messaging_Service";
 
     Bitmap bitmap;
 
@@ -74,9 +74,9 @@ public class FinrecFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentTitle(messageTitle)
                 .setContentText(messageBody)
                 .setContentIntent(pendingIntent)
-                .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(image).bigLargeIcon(image))
-                .addAction(R.drawable.ic_eye, "Watch Now", pendingIntent)
-                .setAutoCancel(true)
+//                .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(image).bigLargeIcon(image))
+//                .addAction(R.drawable.ic_eye, "Watch Now", pendingIntent)
+                .setAutoCancel(false)
                 .setSound(soundUri);
 
 
