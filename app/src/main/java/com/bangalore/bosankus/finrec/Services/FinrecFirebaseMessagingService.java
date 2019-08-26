@@ -25,11 +25,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Objects;
 
+/* FCM push noti - image banner removed from cloud noti. Same is available in Firebase FCM console */
+
 public class FinrecFirebaseMessagingService extends FirebaseMessagingService {
 
     private final String TAG = "Messaging_Service";
 
-    Bitmap bitmap;
+//    Bitmap bitmap;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
