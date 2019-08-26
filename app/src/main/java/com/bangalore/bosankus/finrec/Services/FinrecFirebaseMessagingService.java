@@ -46,13 +46,13 @@ public class FinrecFirebaseMessagingService extends FirebaseMessagingService {
 
         String message = remoteMessage.getData().get("message");
 
-        String imageUri = remoteMessage.getData().get("image");
+//        String imageUri = remoteMessage.getData().get("image");
 
         String TrueOrFlase = remoteMessage.getData().get("AnotherActivity");
 
-        bitmap = getBitmapFromUrl(imageUri);
+//        bitmap = getBitmapFromUrl(imageUri);
 
-        sendNotification(title, message, bitmap, TrueOrFlase);
+        sendNotification(title, message, TrueOrFlase);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class FinrecFirebaseMessagingService extends FirebaseMessagingService {
         Log.d(TAG, "Refreshed token: " + token);
     }
 
-    private void sendNotification(String messageTitle, String messageBody, Bitmap image, String TrueOrFalse) {
+    private void sendNotification(String messageTitle, String messageBody, String TrueOrFalse) {
 
         Intent intent = new Intent(this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
