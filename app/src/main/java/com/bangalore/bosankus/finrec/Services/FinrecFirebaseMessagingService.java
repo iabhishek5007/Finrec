@@ -13,6 +13,7 @@ import android.os.Build;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.bangalore.bosankus.finrec.Activities.CompletedTaskActivity;
 import com.bangalore.bosankus.finrec.Activities.HomeActivity;
@@ -31,7 +32,7 @@ public class FinrecFirebaseMessagingService extends FirebaseMessagingService {
 
     private final String TAG = "Messaging_Service";
 
-    Bitmap bitmap;
+//    Bitmap bitmap;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -52,9 +53,9 @@ public class FinrecFirebaseMessagingService extends FirebaseMessagingService {
 
         String TrueOrFlase = remoteMessage.getData().get("AnotherActivity");
 
-        bitmap = getBitmapFromUrl(imageUri);
+//        bitmap = getBitmapFromUrl(imageUri);
 
-        sendNotification(title, message, TrueOrFlase, bitmap);
+        sendNotification(title, message, TrueOrFlase);
     }
 
     @Override
@@ -62,7 +63,7 @@ public class FinrecFirebaseMessagingService extends FirebaseMessagingService {
         Log.d(TAG, "Refreshed token: " + token);
     }
 
-    private void sendNotification(String messageTitle, String messageBody, String TrueOrFalse, Bitmap image) {
+    private void sendNotification(String messageTitle, String messageBody, String TrueOrFalse) {
 
         Intent intent = new Intent(this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -76,8 +77,9 @@ public class FinrecFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentTitle(messageTitle)
                 .setContentText(messageBody)
                 .setContentIntent(pendingIntent)
-                .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(image).bigLargeIcon(image))
-                .addAction(R.drawable.ic_eye, "Watch Now", pendingIntent)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+//                .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(image).bigLargeIcon(image))
+//                .addAction(R.drawable.ic_eye, "Watch Now", pendingIntent)
                 .setAutoCancel(false)
                 .setSound(soundUri);
 
