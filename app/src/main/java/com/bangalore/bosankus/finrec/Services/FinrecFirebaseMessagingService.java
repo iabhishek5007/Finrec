@@ -31,7 +31,7 @@ public class FinrecFirebaseMessagingService extends FirebaseMessagingService {
 
     private final String TAG = "Messaging_Service";
 
-//    Bitmap bitmap;
+    Bitmap bitmap;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -48,13 +48,13 @@ public class FinrecFirebaseMessagingService extends FirebaseMessagingService {
 
         String message = remoteMessage.getData().get("message");
 
-//        String imageUri = remoteMessage.getData().get("image");
+        String imageUri = remoteMessage.getData().get("image");
 
         String TrueOrFlase = remoteMessage.getData().get("AnotherActivity");
 
-//        bitmap = getBitmapFromUrl(imageUri);
+        bitmap = getBitmapFromUrl(imageUri);
 
-        sendNotification(title, message, TrueOrFlase);
+        sendNotification(title, message, TrueOrFlase, bitmap);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class FinrecFirebaseMessagingService extends FirebaseMessagingService {
         Log.d(TAG, "Refreshed token: " + token);
     }
 
-    private void sendNotification(String messageTitle, String messageBody, String TrueOrFalse) {
+    private void sendNotification(String messageTitle, String messageBody, String TrueOrFalse, Bitmap image) {
 
         Intent intent = new Intent(this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -76,8 +76,8 @@ public class FinrecFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentTitle(messageTitle)
                 .setContentText(messageBody)
                 .setContentIntent(pendingIntent)
-//                .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(image).bigLargeIcon(image))
-//                .addAction(R.drawable.ic_eye, "Watch Now", pendingIntent)
+                .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(image).bigLargeIcon(image))
+                .addAction(R.drawable.ic_eye, "Watch Now", pendingIntent)
                 .setAutoCancel(false)
                 .setSound(soundUri);
 
